@@ -148,7 +148,9 @@ class RouteController {
                         try {
                             let er = POGOProtos.Networking.Responses.EncounterResponse.decode(base64_decode(data));
                             if (er) {
-                                encounters.push(er);
+                                if (er.status == 1){ 
+                                    encounters.push(er);
+                                }
                             } else {
                                 console.error('[Raw] Malformed EncounterResponse');
                             }
