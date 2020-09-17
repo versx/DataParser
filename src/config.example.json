@@ -2,6 +2,7 @@
     "host": "0.0.0.0",
     "port": 9001,
     "clusters": 2,
+    "logLevel": 4,
     "db": {
         "host": "127.0.0.1",
         "port": 3306,
