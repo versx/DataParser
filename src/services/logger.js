@@ -5,5 +5,5 @@ const { Theme } = betterLogging;
 
 betterLogging(console, {
     color: Theme.dark,
-    saveToFile: `../../logs/${Date.now()}.log`,
+    saveToFile: `./logs/${Date.now()}.log`,
 });
