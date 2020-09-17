@@ -7,10 +7,10 @@ const config = require('../config.json');
 const fileName = new Date().toLocaleDateString().replace(/\//g, '-');
 betterLogging(console, {
     color: Theme.dark,
-    saveToFile: `./logs/${fileName}.log`,
+    saveToFile: config.logs.file ? `./logs/${fileName}.log` : null,
 });
 
-console.logLevel = config.logLevel;
+console.logLevel = config.logs.level;
 /**
  * debug: 4
  * log: 3
