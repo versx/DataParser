@@ -2,10 +2,6 @@
     "host": "0.0.0.0",
     "port": 9001,
     "clusters": 2,
-    "logs": {
-        "level": 4,
-        "file": false
-    },
     "db": {
         "host": "127.0.0.1",
         "port": 3306,
@@ -14,6 +10,10 @@
         "database": "bjsdb",
         "charset": "utf8mb4",
         "connectionLimit": 1000
+    },
+    "logs": {
+        "level": 4,
+        "file": false
     },
     "parse": {
         "pokemon": true,
