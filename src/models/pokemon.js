@@ -29,6 +29,34 @@ class Pokemon {
      * @param data 
      */
     constructor(data) {
+        this.spawnId = null;
+        this.expireTimestamp = null;
+        this.atkIv = null;
+        this.defIv = null;
+        this.staIv = null;
+        this.move1 = null;
+        this.move2 = null;
+        this.cp = null;
+        this.level = null;
+        this.weather = 0;
+        this.form = 0;
+        this.costume = 0;
+        this.weight = null;
+        this.size = null;
+        this.displayPokemonId = null;
+        this.pokestopId = null;
+        this.updated = null;
+        this.firstSeenTimestamp = null;
+        this.changed = null
+        this.cellId = null;
+        this.expireTimestampVerified = 0;
+        this.shiny = null;
+        this.username = null;
+        this.capture1 = null;
+        this.capture2 = null;
+        this.capture3 = null;
+        this.pvpRankingsGreatLeague = null;
+        this.pvpRankingsUltraLeague = null;
         if (data.wild) {
             this.initWild(data);
         } else if (data.nearby) {
@@ -118,7 +146,6 @@ class Pokemon {
             } else {
                 spawnpoint = new Spawnpoint(this.spawnId, this.lat, this.lon, null, Math.round(data.timestampMs / 1000));
                 await spawnpoint.save(false);
-                this.expireTimestamp = null;
             }
         }
         if (data.wild.cell === undefined || data.wild.cell === null) {
@@ -141,20 +168,6 @@ class Pokemon {
                 level = Math.round(171.0112688 * cpMultiplier - 95.20425243);
             }
             this.level = level;
-            this.capture1 = null;
-            this.capture2 = null;
-            this.capture3 = null;
-        } else {
-            this.atkIv = null;
-            this.defIv = null;
-            this.staIv = null;
-            this.move1 = null;
-            this.move2 = null;
-            this.cp = null;
-            this.level = null;
-            this.capture1 = null;
-            this.capture2 = null;
-            this.capture3 = null;
         }
         this.changed = Math.round(timestampMs / 1000);
     }
@@ -565,35 +578,35 @@ class Pokemon {
             ${this.pokemonId},
             ${this.lat},
             ${this.lon},
-            ${this.spawnId || null},
-            ${this.expireTimestamp || null},
-            ${this.atkIv || null},
-            ${this.defIv || null},
-            ${this.staIv || null},
-            ${this.move1 || null},
-            ${this.move2 || null},
+            ${this.spawnId},
+            ${this.expireTimestamp},
+            ${this.atkIv},
+            ${this.defIv},
+            ${this.staIv},
+            ${this.move1},
+            ${this.move2},
             ${this.gender},
             ${this.form},
-            ${this.cp || null},
-            ${this.level || null},
-            ${this.weather || 0},
-            ${this.costume || 0},
-            ${this.weight || null},
-            ${this.size || null},
-            ${this.displayPokemonId || null},
-            ${this.pokestopId ? '"' + this.pokestopId + '"' : null},
-            ${this.updated || null},
-            ${this.firstSeenTimestamp || null},
-            ${this.changed || null},
-            ${this.cellId || null},
-            ${this.expireTimestampVerified || 0},
-            ${this.shiny || null},
-            ${this.username ? '"' + this.username + '"' : null},
-            ${this.capture1 || null},
-            ${this.capture2 || null},
-            ${this.capture3 || null},
-            ${this.pvpRankingsGreatLeague ? "'" + JSON.stringify(this.pvpRankingsGreatLeague) + "'" : null},
-            ${this.pvpRankingsUltraLeague ? "'" + JSON.stringify(this.pvpRankingsUltraLeague) + "'" : null}
+            ${this.cp},
+            ${this.level},
+            ${this.weather},
+            ${this.costume},
+            ${this.weight},
+            ${this.size},
+            ${this.displayPokemonId},
+            ${this.pokestopId !== null ? '"' + this.pokestopId + '"' : null},
+            ${this.updated},
+            ${this.firstSeenTimestamp},
+            ${this.changed},
+            ${this.cellId},
+            ${this.expireTimestampVerified},
+            ${this.shiny},
+            ${this.username !== null ? '"' + this.username + '"' : null},
+            ${this.capture1},
+            ${this.capture2},
+            ${this.capture3},
+            ${this.pvpRankingsGreatLeague !== null ? "'" + JSON.stringify(this.pvpRankingsGreatLeague) + "'" : null},
+            ${this.pvpRankingsUltraLeague !== null ? "'" + JSON.stringify(this.pvpRankingsUltraLeague) + "'" : null}
         )
         `;
     }
@@ -612,30 +625,30 @@ class Pokemon {
                 latitude: this.lat,
                 longitude: this.lon,
                 disappear_time: this.expireTimestamp || 0,
-                disappear_time_verified: this.expireTimestampVerified || 0,
+                disappear_time_verified: this.expireTimestampVerified,
                 first_seen: this.firstSeenTimestamp || 1,
                 last_modified_time: this.updated || 1,
                 gender: this.gender,
-                cp: this.cp || null,
-                form: this.form || 0,
-                costume: this.costume || 0,
-                individual_attack: this.atkIv || null,
-                individual_defense: this.defIv || null,
-                individual_stamina: this.staIv || null,
-                pokemon_level: this.level || null,
-                move_1: this.move1 || null,
-                move_2: this.move2 || null,
-                weight: this.weight || null,
-                height: this.size || null,
-                weather: this.weather || 0,
-                shiny: this.shiny || null,
-                username: this.username || null,
-                display_pokemon_id: this.displayPokemonId || null,
-                capture_1: this.capture1 || null,
-                capture_2: this.capture2 || null,
-                capture_3: this.capture3 || null,
-                pvp_rankings_great_league: this.pvpRankingsGreatLeague || null,
-                pvp_rankings_ultra_league: this.pvpRankingsUltraLeague || null,
+                cp: this.cp,
+                form: this.form,
+                costume: this.costume,
+                individual_attack: this.atkIv,
+                individual_defense: this.defIv,
+                individual_stamina: this.staIv,
+                pokemon_level: this.level,
+                move_1: this.move1,
+                move_2: this.move2,
+                weight: this.weight,
+                height: this.size,
+                weather: this.weather,
+                shiny: this.shiny,
+                username: this.username,
+                display_pokemon_id: this.displayPokemonId,
+                capture_1: this.capture1,
+                capture_2: this.capture2,
+                capture_3: this.capture3,
+                pvp_rankings_great_league: this.pvpRankingsGreatLeague,
+                pvp_rankings_ultra_league: this.pvpRankingsUltraLeague,
             }
         }
     }
